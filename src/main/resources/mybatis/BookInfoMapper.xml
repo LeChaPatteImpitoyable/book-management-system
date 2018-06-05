@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ying.background.mapper.BookInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ying.background.model.BookInfo" >
+    <id column="book_id" property="bookId" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="publish" property="publish" jdbcType="VARCHAR" />
+    <result column="ISBN" property="isbn" jdbcType="VARCHAR" />
+    <result column="language" property="language" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="pubdate" property="pubdate" jdbcType="DATE" />
+    <result column="class_id" property="classId" jdbcType="INTEGER" />
+    <result column="pressmark" property="pressmark" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="SMALLINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_id" property="createId" jdbcType="INTEGER" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="modify_id" property="modifyId" jdbcType="INTEGER" />
+    <result column="is_deleted" property="isDeleted" jdbcType="INTEGER" />
+    <result column="introduction" property="introduction" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    book_id, name, author, publish, ISBN, language, price, pubdate, class_id, pressmark, 
+    state, create_time, create_id, modify_time, modify_id, is_deleted, introduction
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from book_info
+    where book_id = #{bookId,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectAllBooks" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from book_info
+    where is_deleted = 0;
+  </select>
+
+  <insert id="insert" parameterType="com.ying.background.model.BookInfo" >
+    insert into book_info (name, author,
+      publish, ISBN, language, 
+      price, pubdate, class_id, 
+      pressmark, state, create_time, 
+      create_id, modify_time, modify_id, introduction)
+    values (#{name,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR},
+      #{publish,jdbcType=VARCHAR}, #{isbn,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DECIMAL}, #{pubdate,jdbcType=DATE}, #{classId,jdbcType=INTEGER}, 
+      #{pressmark,jdbcType=INTEGER}, #{state,jdbcType=SMALLINT}, now(),
+      #{createId,jdbcType=INTEGER}, now(), #{modifyId,jdbcType=INTEGER}, #{introduction,jdbcType=LONGVARCHAR})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.ying.background.model.BookInfo" >
+    update book_info
+    set name = #{name,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      publish = #{publish,jdbcType=VARCHAR},
+      ISBN = #{isbn,jdbcType=VARCHAR},
+      language = #{language,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      pubdate = #{pubdate,jdbcType=DATE},
+      class_id = #{classId,jdbcType=INTEGER},
+      pressmark = #{pressmark,jdbcType=INTEGER},
+      state = #{state,jdbcType=SMALLINT},
+      modify_time = now(),
+      modify_id = #{modifyId,jdbcType=INTEGER}
+    where book_id = #{bookId,jdbcType=BIGINT}
+  </update>
+
+  <update id="deleteBookByBookId" parameterType="com.ying.background.model.BookInfo" >
+    update book_info
+    set is_deleted = #{isDeleted},
+      modify_time = now(),
+      modify_id = #{modifyId}
+    where book_id = #{bookId}
+  </update>
+</mapper>
