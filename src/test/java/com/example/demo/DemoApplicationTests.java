@@ -17,30 +17,30 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @WebAppConfiguration
 public class DemoApplicationTests {
 
-    @Autowired
-    private ITestService testService;
-
-    @Autowired
-    private CustomerMapper customerMapper;
-
-    @Autowired
-    private ICustomerService customerService;
-
+//    @Autowired
+//    private ITestService testService;
+//
+//    @Autowired
+//    private CustomerMapper customerMapper;
+//
+//    @Autowired
+//    private ICustomerService customerService;
+//
     @Autowired
     private BookInfoMapper bookInfoMapper;
-
-	@Test
-	public void test() {
-        System.out.println(testService.getAll().size());
-    }
-
-    @Test
-    public void test2(){
-//        System.out.println(customerMapper.toLogin("2018","zqx2018") == null);
-
-        System.out.println(customerService.login("2018", "zqx2018", null, null).getToken());
-    }
-
+//
+//	@Test
+//	public void test() {
+//        System.out.println(testService.getAll().size());
+//    }
+//
+//    @Test
+//    public void test2(){
+////        System.out.println(customerMapper.toLogin("2018","zqx2018") == null);
+//
+//        System.out.println(customerService.login("2018", "zqx2018", null, null).getToken());
+//    }
+//
     @Test
     public void test3(){
         System.out.println(bookInfoMapper.selectByPrimaryKey(1L));
