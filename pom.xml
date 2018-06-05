@@ -114,6 +114,7 @@
 	<build>
 		<finalName>w2book</finalName>
 		<plugins>
+			<!-- 打包时不运行test -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
