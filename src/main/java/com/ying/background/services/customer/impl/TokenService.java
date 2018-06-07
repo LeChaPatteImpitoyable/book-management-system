@@ -53,7 +53,7 @@ public class TokenService implements ITokenService {
 	}
 
    private  String generateLoginToken(String mobile, String password, String ip, String lastLoginTime, String cid,String key) {
-	        String original = "[mobile:{0}],[password:{1}],[IP:{2}],[time:{3}],[cid:{4}]]";
+	        String original = "[mobile:{0}],[password:{1}],[IP:{2}],[time:{3}],[cid:{4}]";
 	        String str = MessageFormat.format(original, mobile, password, ip, lastLoginTime, cid);
 	        return AES128.encryptAES(str,key);
 	}
@@ -88,6 +88,7 @@ public class TokenService implements ITokenService {
 
 	@Override
 	public int getCid(String token) {
+		token = AES128.decrypt(token, tokenAesKey);
 		String cid = obtain(token, "cid");
 		if(StringUtils.isEmpty(cid)){
 			return Constants.NUMBER.ZERO;

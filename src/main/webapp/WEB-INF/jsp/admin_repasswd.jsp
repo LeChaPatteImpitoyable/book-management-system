@@ -8,7 +8,15 @@
     <script src="js/bootstrap.min.js" ></script>
     <style>
         body{
-            background-color: rgb(240,242,245);
+            /*background-color: rgb(240,242,245);*/
+            background: url('https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/0F/09/ChMkJlauzYiIIU3UAFNltyuxFDQAAH9GAKkOzMAU2XP642.jpg') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+        .panel{
+            opacity:0.95;
         }
     </style>
 
@@ -54,6 +62,7 @@
                 </div>
             </form>
         </div>
+        <input type="button" style="float: right;" onclick="javascript:history.back(-1);" value="返回上一页">
     </div>
 </div>
 

@@ -73,7 +73,6 @@ public class HttpUtil {
         Cookie cookie = new Cookie(key, null);
         cookie.setPath(PATH_SIGN);
         cookie.setMaxAge(0);
-        cookie.setDomain(PropertiesUtil.getProperties(DOMAN));
         cookie.setPath(PATH_SIGN);
         response.addCookie(cookie);
     }

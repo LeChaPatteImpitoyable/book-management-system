@@ -48,7 +48,7 @@
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
         
-        <table tableName="book_info" domainObjectName="BookInfo"
+        <table tableName="lend_list" domainObjectName="Lend"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false"></table>

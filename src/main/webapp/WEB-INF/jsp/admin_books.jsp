@@ -11,7 +11,12 @@
     <script src="js/initPage.js" ></script>
     <style>
         body{
-            background-color: rgb(240,242,245);
+            /*background-color: rgb(240,242,245);*/
+            background: url('https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/0E/0F/ChMkJ1sYylmIJMWEAA2kWnSS2pMAAo2TQGcckMADaRy914.jpg') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
         }
         input{
             autocomplete: off;
@@ -20,34 +25,22 @@
             text-align:center;/*居中*/
         }
         .panel-default{
-            opacity:0.88;
+            opacity:0.90;
         }
     </style>
 </head>
-<body background="image/3d7b3f455ebc23e52c4edbc0f2d34d53.jpg">
+<body>
 
 <jsp:include page="head.jsp"/>
 <div style="padding: 70px 550px 10px">
     <form   method="post" action="querybook.html" class="form-inline"  id="searchform">
         <div class="input-group">
-           <input type="text" placeholder="输入图书名" autocomplete="off" id="search" name="searchWord" class="form-control">
+           <input type="text" placeholder="输入图书名" value="${keyword}" autocomplete="off" id="search" name="keyword" class="form-control">
             <span class="input-group-btn">
                 <input type="submit" value="搜索" class="btn btn-default">
             </span>
         </div>
     </form>
-    <script>
-        function mySubmit(flag){
-            return flag;
-        }
-        $("#searchform").submit(function () {
-            var val=$("#search").val();
-            if(val==''){
-                alert("请输入关键字");
-                return mySubmit(false);
-            }
-        })
-    </script>
 </div>
 <div style="position: relative;top: 10%">
 <c:if test="${!empty succ}">
@@ -86,6 +79,16 @@
 
 
 <script>
+    function mySubmit(flag){
+        return flag;
+    }
+    $("#searchform").submit(function () {
+        var val=$("#search").val();
+        if(val==''){
+            alert("请输入关键字");
+            return mySubmit(false);
+        }
+    });
 
 //    setTimeout(function(){document.getElementsByClassName("alert-dismissable").style.display="none";},1000);
 //
@@ -116,17 +119,18 @@
         },
     });
 
-function refrechHtm (curPage,pageSize) {
-    $.ajax({
-        type: "get",
-        url: "/allbooks_do.html?curPage="+curPage+"&pageSize="+pageSize,
-        dateType: "html",
-        success: function (res) {
-            console.log(JSON.stringify(${totalCount}));
-            $("#list").html(res);
-        }
-    });
-}
+    function refrechHtm (curPage,pageSize) {
+        var keyword = ${keyword}+ '';
+        $.ajax({
+            type: "get",
+            url: "/allbooks_do.html?curPage="+curPage+"&pageSize="+pageSize+"&keyword="+keyword,
+            dateType: "html",
+            success: function (res) {
+                console.log(JSON.stringify(${totalCount}));
+                $("#list").html(res);
+            }
+        });
+    }
 </script>
 
 </body>

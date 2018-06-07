@@ -1,4 +1,4 @@
-package com.ying.background.model;
+package com.ying.background.dto;
 
 import lombok.Data;
 
@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
-public class BookInfo {
+public class BookInfoDTO {
     private Long bookId;
 
     private String name;

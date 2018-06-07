@@ -11,7 +11,15 @@
     <script src="js/initPage.js" ></script>
     <style>
         body{
-            background-color: rgb(240,242,245);
+            /*background-color: rgb(240,242,245);*/
+            background: url('https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/0F/09/ChMkJlauzYiIIU3UAFNltyuxFDQAAH9GAKkOzMAU2XP642.jpg') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+        .panel{
+            opacity:0.90;
         }
     </style>
 
@@ -19,26 +27,18 @@
 <body>
 <jsp:include page="head.jsp"/>
 <div style="padding: 70px 550px 10px">
-    <form   method="post" action="querybook.html" class="form-inline"  id="searchform">
+    <form   method="post" action="lendlist.html" class="form-inline"  id="searchform">
         <div class="input-group">
-            <input type="text" placeholder="输入图书名" class="form-control" id="search" name="searchWord" class="form-control">
+            <input type="text" placeholder="输入超期的天数" value="${deadline}" id="deadline" name="deadline" class="form-control">
+            <input type="text" placeholder="输入相关的信息" value="${keyword}" id="keyword" name="keyword" class="form-control">
             <span class="input-group-btn">
-                            <input type="submit" value="搜索" class="btn btn-default">
+                <input type="submit" value="搜索" class="btn btn-default" style="padding: 23px 12px;">
+            </span>
+            <span class="input-group-btn">
+                <<a href="lendlist.html"><input type="button" value="清空" class="btn btn-default" style="padding: 23px 12px;"></a>
             </span>
         </div>
     </form>
-    <script>
-        function mySubmit(flag){
-            return flag;
-        }
-        $("#searchform").submit(function () {
-            var val=$("#search").val();
-            if(val==''){
-                alert("请输入关键字");
-                return mySubmit(false);
-            }
-        })
-    </script>
 </div>
 <div style="position: relative;top: 10%">
     <c:if test="${!empty succ}">
@@ -75,6 +75,16 @@
 </div>
 
 <script>
+    function mySubmit(flag){
+        return flag;
+    }
+    $("#searchform").submit(function () {
+        var val=$("#keyword").val();
+        if(val==''){
+            alert("请输入关键字");
+            return mySubmit(false);
+        }
+    })
 
     //    setTimeout(function(){document.getElementsByClassName("alert-dismissable").style.display="none";},1000);
     //
@@ -106,9 +116,11 @@
     });
 
     function refrechHtm (curPage,pageSize) {
+        var keyword = ${keyword}+ '';
+        var deadline = ${deadline}+ '';
         $.ajax({
             type: "get",
-            url: "/lendlist_do.html?curPage="+curPage+"&pageSize="+pageSize,
+            url: "/lendlist_do.html?curPage="+curPage+"&pageSize="+pageSize+"&keyword="+keyword+"&deadline="+deadline,
             dateType: "html",
             success: function (res) {
                 console.log(JSON.stringify(${totalCount}));

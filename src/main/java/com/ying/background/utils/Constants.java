@@ -1,7 +1,10 @@
 package com.ying.background.utils;
 
 public class Constants {
-	
+
+	public static final int DEFAULT_INDEX = 0;
+	public static final int DEFAULT_SIZE = 9;
+
 	public static final String PATH_SIGN = "/";
 	public static final String QUERY_SIGN = "?";
 	public static final String SEPARATE_SIGN = "&";
@@ -32,6 +35,11 @@ public class Constants {
 		
 		public static final long ONE_DAY_MILLS = 24l * 60l * 60l * 1000l;
 		public static final long NINETY_DAY_MILLS = 24l * 60l * 60l * 1000l * 90l;
+	}
+
+	public static class IS_DELETED{
+		public static final int NO = 0;
+		public static final int YES = 1;
 	}
 	
 	public static class NUMBER {
@@ -82,5 +90,28 @@ public class Constants {
 		public static final String POST = "POST";
 		public static final String GET = "GET";
 	}
-	
+
+	public static class JSP_VIEW {
+		public static final String REDIRECT = "redirect:/";
+		public static final String ADMIN_BOOKS = "admin_books";
+		public static final String ADMIN_BOOK_LIST = "admin_book_list";
+		public static final String ALLBOOKS = "allbooks.html";
+		public static final String READER_QUERYBOOK = "reader_querybook.html";
+		public static final String ADMIN_BOOK_DETAIL = "admin_book_detail";
+		public static final String READER_BOOK_DETAIL = "reader_book_detail";
+		public static final String READER_BOOK_QUERY = "reader_book_query";
+		public static final String ADMIN_BOOK_ADD = "admin_book_add";
+		public static final String ADMIN_BOOK_EDIT = "admin_book_edit";
+	}
+
+	public static final String TOTALCOUNT = "totalCount";
+	public static final String BOOKS = "books";
+	public static final String DETAIL = "detail";
+	public static final String BOOKID = "bookId";
+	public static final String ERROR = "error";
+
+	public static  class BOOK_STATE{
+		public static final short HAS_BORROWED = 0;//也借出
+		public static final short NOT_LEND = 1;//未借出
+	}
 }

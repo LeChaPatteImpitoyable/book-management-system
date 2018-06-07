@@ -2,9 +2,6 @@ package com.example.demo;
 
 import com.ying.background.Application;
 import com.ying.background.mapper.BookInfoMapper;
-import com.ying.background.mapper.CustomerMapper;
-import com.ying.background.services.customer.ICustomerService;
-import com.ying.background.services.test.ITestService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +15,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 public class DemoApplicationTests {
 
 //    @Autowired
-//    private ITestService testService;
-//
-//    @Autowired
 //    private CustomerMapper customerMapper;
 //
 //    @Autowired
@@ -28,11 +22,7 @@ public class DemoApplicationTests {
 //
     @Autowired
     private BookInfoMapper bookInfoMapper;
-//
-//	@Test
-//	public void test() {
-//        System.out.println(testService.getAll().size());
-//    }
+
 //
 //    @Test
 //    public void test2(){

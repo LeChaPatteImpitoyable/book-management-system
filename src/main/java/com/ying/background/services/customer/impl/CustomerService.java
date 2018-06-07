@@ -35,4 +35,14 @@ public class CustomerService implements ICustomerService {
         customer.setToken(token);
         return customer;
     }
+
+    @Override
+    public Customer getCustomer(int cid) {
+        return customerMapper.selectCustomerById(cid);
+    }
+
+    @Override
+    public boolean updatePassword(int cid, String passwd) {
+        return customerMapper.updatePasswd(cid, passwd) > 0;
+    }
 }

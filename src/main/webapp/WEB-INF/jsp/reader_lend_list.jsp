@@ -10,6 +10,13 @@
         body{
             background-color: rgb(240,242,245);
         }
+        html{
+            background: url('https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/0F/09/ChMkJlauzYiIIU3UAFNltyuxFDQAAH9GAKkOzMAU2XP642.jpg') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
     </style>
 </head>
 <body>
@@ -44,34 +51,7 @@
         </h3>
     </div>
     <div class="panel-body">
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th>图书号</th>
-                <th>借出日期</th>
-                <th>归还日期</th>
-                <th>状态</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach items="${list}" var="alog">
-                <tr>
-                    <td><c:out value="${alog.bookId}"></c:out></td>
-                    <td><c:out value="${alog.lendDate}"></c:out></td>
-                    <td><c:out value="${alog.backDate}"></c:out></td>
-                    <c:if test="${empty alog.backDate}">
-                        <td>未还</td>
-                    </c:if>
-                    <c:if test="${!empty alog.backDate}">
-                        <td>已还</td>
-                    </c:if>
-                    <c:if test="">
-                        <td>超期</td>
-                    </c:if>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
+        <jsp:include page="reader_l.jsp"/>
     </div>
 </div>
 

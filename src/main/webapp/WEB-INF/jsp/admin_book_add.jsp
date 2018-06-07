@@ -8,7 +8,12 @@
     <script src="js/bootstrap.min.js" ></script>
     <style>
         body{
-            background-color: rgb(240,242,245);
+            /*background-color: rgb(240,242,245);*/
+            background: url('https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/02/01/ChMkJ1bKxTWIcg6zABCsG4tshzUAALHSgDUY_cAEKwz686.jpg') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
         }
     </style>
 
@@ -57,12 +62,13 @@
                 <%--</div>--%>
                 <div class="form-group">
                     <label for="classId">分类号</label>
-                    <select id="classId" class="form-control" name="分类号">
-                        <option value="">请选择...</option>
-                        <c:forEach items="${classInfos}" var="classInfo">
-                            <option value="${classInfo.classId}">${classInfo.className}</option>
-                        </c:forEach>
-                    </select>
+                    <input type="text" class="form-control" name="classId" id="classId" placeholder="请输入分类号">
+                    <%--<select id="classId" class="form-control" name="分类号">--%>
+                        <%--<option value="">请选择...</option>--%>
+                        <%--<c:forEach items="${classInfos}" var="classInfo">--%>
+                            <%--<option value="${classInfo.classId}">${classInfo.className}</option>--%>
+                        <%--</c:forEach>--%>
+                    <%--</select>--%>
                 </div>
                 <div class="form-group">
                     <label for="pressmark">书架号</label>
@@ -80,6 +86,7 @@
 
 
                 <input type="submit" value="添加" class="btn btn-success btn-sm" class="text-left">
+                <input type="button" style="float: right;" onclick="javascript:history.back(-1);" value="返回上一页">
                 <script>
                     window.onload = function () {
                         $("#author").val("作者");
@@ -89,8 +96,8 @@
                         $("#language").val("中文");
 //                        $("#price").val("0.00");
                         $("#pubdate").val("2018-06-01");
-                        $("#classId").val("9");
-                        $("#classId").find("option[value='9']").attr("selected",true)
+                        $("#classId").val("图书");
+//                        $("#classId").find("option[value='9']").attr("selected",true)
                         $("#pressmark").val("1");
                         $("#state").val("1");
                     }
@@ -111,7 +118,6 @@
                     })
                 </script>
             </form>
-
 </div>
 
 

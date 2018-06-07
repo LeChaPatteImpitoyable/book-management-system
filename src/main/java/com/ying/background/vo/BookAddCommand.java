@@ -7,7 +7,6 @@ import java.util.Date;
 
 public class BookAddCommand {
 
-
     private String name;
     private String author;
     private String publish;
@@ -16,9 +15,9 @@ public class BookAddCommand {
     private String language;
     private BigDecimal price;
     private Date pubdate;
-    private int classId;
+    private String classId;
     private int pressmark;
-    private int state;
+    private Short state;
 
     public void setName(String name) {
         this.name = name;
@@ -26,10 +25,6 @@ public class BookAddCommand {
 
     public void setAuthor(String author) {
         this.author = author;
-    }
-
-    public void setClassId(int classId) {
-        this.classId = classId;
     }
 
     public void setLanguage(String language) {
@@ -70,7 +65,7 @@ public class BookAddCommand {
         this.pressmark = pressmark;
     }
 
-    public void setState(int state) {
+    public void setState(Short state) {
         this.state = state;
     }
 
@@ -82,9 +77,12 @@ public class BookAddCommand {
         return price;
     }
 
-
-    public int getClassId() {
+    public String getClassId() {
         return classId;
+    }
+
+    public void setClassId(String classId) {
+        this.classId = classId;
     }
 
     public Date getPubdate() {
@@ -111,7 +109,7 @@ public class BookAddCommand {
         return language;
     }
 
-    public int getState() {
+    public Short getState() {
         return state;
     }
 

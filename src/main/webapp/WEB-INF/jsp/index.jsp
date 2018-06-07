@@ -1,5 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    String path = request.getContextPath();
+    request.setAttribute("path", path);
+%>
 <html>
 <head>
     <title>图书馆首页</title>
@@ -175,13 +179,13 @@
     </ol>
     <div class="carousel-inner">
         <div class="item active">
-            <img src="image/82839-106.jpg" alt="第一张">
+            <img src="https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/01/0E/ChMkJ1bKwgaIU4x1ABOARXKNvegAALGhgKtosgAE4Bd920.jpg" alt="第一张">
         </div>
         <div class="item">
-            <img src="image/105905-106.jpg" alt="第二张">
+            <img src="https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/01/0E/ChMkJ1bKwgaINy1zABfWff84rJoAALGhgKVzDMAF9aV390.jpg" alt="第二张">
         </div>
         <div class="item">
-            <img src="image/296494-106.jpg" alt="第三张">
+            <img src="https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/01/0E/ChMkJlbKwgeIK5VkABe7cDJ4hEUAALGhgLidmcAF7uI879.jpg" alt="第三张">
         </div>
 
     </div>
@@ -192,6 +196,7 @@
        data-slide="next">&rsaquo;
     </a>
 </div>
+
 <div class="panel panel-default" id="login">
     <div class="panel-heading" style="background-color: #fff">
         <h3 class="panel-title">请登录</h3>
@@ -218,10 +223,19 @@
     </div>
 </div>
     <script>
+        function checknum(value) {
+            var Regx = /^[A-Za-z0-9]*$/;
+            if (Regx.test(value)) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
         $("#account").keyup(
             function () {
-                if(isNaN($("#account").val())){
-                    $("#info").text("提示:账号只能为数字");
+                if(checknum($("#account").val())){
+                    $("#info").text("提示:账号只能为数字和字母");
                 }
                 else {
                     $("#info").text("");
@@ -251,7 +265,7 @@
         }
 
         // 设置登录信息
-        setLoginStatus();
+//        setLoginStatus();
         $("#loginButton").click(function () {
             var account =$("#account").val();
             var passwd=$("#passwd").val();
@@ -266,13 +280,13 @@
             else if( passwd ==''){
                 $("#info").text("提示:密码不能为空");
             }
-            else if(isNaN( account )){
-                $("#info").text("提示:账号必须为数字");
+            else if(checknum(account)){
+                $("#info").text("提示:账号必须为数字和字母");
             }
             else {
                 $.ajax({
                     type: "POST",
-                    url: "/api/loginCheck",
+                    url: "${path}/api/loginCheck",
                     data: {
                         account:account ,
                         passwd: passwd
@@ -281,7 +295,7 @@
                     success: function(data) {
                         if(data.code == "SUCCESS") {
                             $("#info").text("提示:登陆成功，跳转中...");
-                            window.location.href="/allbooks.html";
+                            window.location.href="${path}/allbooks.html";
 
                         } else {
                             $("#info").text(data.message);

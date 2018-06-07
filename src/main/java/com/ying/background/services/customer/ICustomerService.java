@@ -4,5 +4,9 @@ import com.ying.background.model.Customer;
 
 public interface ICustomerService {
 
-    public Customer login(String telephone, String password, String clientIp, String appType);
+    Customer login(String telephone, String password, String clientIp, String appType);
+
+    Customer getCustomer(int cid);
+
+    boolean updatePassword(int cid, String passwd);
 }

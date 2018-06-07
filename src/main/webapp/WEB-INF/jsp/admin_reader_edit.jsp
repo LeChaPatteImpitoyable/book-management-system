@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <html>
 <head>
     <title>编辑读者信息《 ${readerInfo.readerId}》</title>
@@ -8,7 +9,15 @@
     <script src="js/bootstrap.min.js" ></script>
     <style>
         body{
-            background-color: rgb(240,242,245);
+            /*background-color: rgb(240,242,245);*/
+            background: url('https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/02/06/ChMkJ1bKynKIJdkTAEoM11B450YAALIbwFdKEgASgzv882.jpg') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+        .panel{
+            opacity:0.95;
         }
     </style>
 
@@ -43,7 +52,7 @@
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon">生日</span>
-                    <input type="text" class="form-control" name="birth" id="birth"  value="${readerInfo.birth}" >
+                    <input type="text" class="form-control" name="birth" id="birth"  value="<fmt:formatDate value='${readerInfo.birth}' type='date'/>" >
                 </div>
                 <div class="input-group">
                     <span  class="input-group-addon">地址</span>

@@ -11,7 +11,15 @@
     <script src="js/initPage.js" ></script>
     <style>
         body{
-            background-color: rgb(240,242,245);
+            /*background-color: rgb(240,242,245);*/
+            background: url('https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/02/06/ChMkJ1bKynKIJdkTAEoM11B450YAALIbwFdKEgASgzv882.jpg') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+        .panel{
+            opacity:0.90;
         }
     </style>
 
@@ -21,6 +29,7 @@
     <script>alert("${info}");window.location.href="allreaders.html"</script>
 </c:if>
 <jsp:include page="head.jsp"/>
+
 <div style="position: relative;top: 15%">
 <c:if test="${!empty succ}">
     <div class="alert alert-success alert-dismissable">
@@ -42,8 +51,17 @@
 </c:if>
 </div>
 
-
-<div class="panel panel-default" style="position:relative;top: 80px;width: 90%;margin-left: 5%">
+<div style="padding: 70px 550px 10px">
+    <form   method="post" action="allreaders.html" class="form-inline"  id="searchform">
+        <div class="input-group">
+            <input type="text" placeholder="输入读者姓名或卡号" value="${keyword}" autocomplete="off" id="keyword" name="keyword" class="form-control">
+            <span class="input-group-btn">
+                <input type="submit" value="搜索" class="btn btn-default">
+            </span>
+        </div>
+    </form>
+</div>
+<div class="panel panel-default" style="position:relative;width: 90%;margin-left: 5%">
     <div class="panel-heading">
         <h3 class="panel-title">
             全部读者
@@ -59,6 +77,16 @@
 
 <script>
 
+    function mySubmit(flag){
+        return flag;
+    }
+    $("#searchform").submit(function () {
+        var val=$("#keyword").val();
+        if(val==''){
+            alert("请输入关键字");
+            return mySubmit(false);
+        }
+    });
     //    setTimeout(function(){document.getElementsByClassName("alert-dismissable").style.display="none";},1000);
     //
     //    $(document).ready(function(){//页面加载完之后，自动执行该方法
@@ -89,9 +117,10 @@
     });
 
     function refrechHtm (curPage,pageSize) {
+        var keyword = ${keyword}+ '';
         $.ajax({
             type: "get",
-            url: "/allreaders_do.html?curPage="+curPage+"&pageSize="+pageSize,
+            url: "/allreaders_do.html?curPage="+curPage+"&pageSize="+pageSize+"&keyword="+keyword,
             dateType: "html",
             success: function (res) {
                 console.log(JSON.stringify(${totalCount}));

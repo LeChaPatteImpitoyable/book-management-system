@@ -2,8 +2,13 @@ package com.ying.background.controller;
 
 import com.ying.background.dao.model.Book;
 import com.ying.background.dao.model.ReaderCard;
+import com.ying.background.model.BookInfo;
+import com.ying.background.model.Lend;
 import com.ying.background.services.BookService;
 import com.ying.background.services.LendService;
+import com.ying.background.services.book.IBookService;
+import com.ying.background.services.lend.ILendService;
+import com.ying.background.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,37 +18,36 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-public class LendController {
+public class LendController extends BaseController{
 
-    private LendService lendService;
     @Autowired
-    public void setLendService(LendService lendService) {
-        this.lendService = lendService;
-    }
-    private BookService bookService;
+    private IBookService bookServiceImpl;
+
     @Autowired
-    public void setBookService(BookService bookService) {
-        this.bookService = bookService;
-    }
+    private ILendService lendServiceImpl;
 
     @RequestMapping("/lendbook.html")
-    public ModelAndView bookLend(HttpServletRequest request){
-        long bookId=Integer.parseInt(request.getParameter("bookId"));
-        Book book=bookService.getBook(bookId);
-       ModelAndView modelAndView=new ModelAndView("admin_book_lend");
-       modelAndView.addObject("book",book);
-       return modelAndView;
+    public ModelAndView bookLend(){
+        long bookId = Integer.parseInt(request.getParameter("bookId"));
+        BookInfo book = bookServiceImpl.getBookDetail(bookId);
+        ModelAndView modelAndView=new ModelAndView("admin_book_lend");
+        modelAndView.addObject("book",book);
+        return modelAndView;
     }
 
     @RequestMapping("/lendbookdo.html")
-    public String bookLendDo(HttpServletRequest request, RedirectAttributes redirectAttributes, int readerId){
-        long bookId=Integer.parseInt(request.getParameter("id"));
-        boolean lendsucc=lendService.bookLend(bookId,readerId);
+    public String bookLendDo(RedirectAttributes redirectAttributes, int readerId){
+        long bookId = Integer.parseInt(request.getParameter("id"));
+        Lend lend = new Lend();
+        lend.setBookId(bookId);
+        lend.setReaderId(readerId);
+        lend.setCreateId(getCid());
+        boolean lendsucc = lendServiceImpl.bookLend(lend);
         if (lendsucc){
             redirectAttributes.addFlashAttribute("succ", "图书借阅成功！");
             return "redirect:/allbooks.html";
         }else {
-            redirectAttributes.addFlashAttribute("succ", "图书借阅成功！");
+            redirectAttributes.addFlashAttribute("error", "图书借阅失败！");
             return "redirect:/allbooks.html";
         }
 
@@ -51,9 +55,12 @@ public class LendController {
     }
 
     @RequestMapping("/returnbook.html")
-    public String bookReturn(HttpServletRequest request, RedirectAttributes redirectAttributes){
-        long bookId=Integer.parseInt(request.getParameter("bookId"));
-        boolean retSucc=lendService.bookReturn(bookId);
+    public String bookReturn(RedirectAttributes redirectAttributes){
+        long bookId = Integer.parseInt(request.getParameter("bookId"));
+        Lend lend = new Lend();
+        lend.setBookId(bookId);
+        lend.setModifyId(getCid());
+        boolean retSucc = lendServiceImpl.returnBook(lend);
         if (retSucc){
             redirectAttributes.addFlashAttribute("succ", "图书归还成功！");
             return "redirect:/allbooks.html";
@@ -65,38 +72,50 @@ public class LendController {
     }
 
     @RequestMapping("/lendlist.html")
-    public ModelAndView lendList(){
-        int totalCount = lendService.getAllLendCount();
+    public ModelAndView lendList(String keyword, Integer deadline){
+        if(deadline == null){
+            deadline = 0;
+        }
+        int totalCount = lendServiceImpl.getQueryLendListCount(keyword, deadline);
         ModelAndView modelAndView=new ModelAndView("admin_lend_list");
         if(totalCount > 0){
-            modelAndView.addObject("list",lendService.getPageLendList(1, 9));
+            modelAndView.addObject("list",
+                    lendServiceImpl.queryLendList(keyword, deadline, Constants.DEFAULT_INDEX, Constants.DEFAULT_SIZE));
         }
         modelAndView.addObject("totalCount", totalCount);
+        modelAndView.addObject("keyword", keyword);
+        modelAndView.addObject("deadline", deadline==0?null:deadline);
         return modelAndView;
     }
 
     @RequestMapping("/lendlist_do.html")
-    public ModelAndView lendListDo(int curPage, int pageSize){
-        int totalCount = lendService.getAllLendCount();
+    public ModelAndView lendListDo(String keyword, Integer deadline, int curPage, int pageSize){
+        if(deadline == null){
+            deadline = 0;
+        }
+        int totalCount = lendServiceImpl.getQueryLendListCount(keyword, deadline);
         ModelAndView modelAndView=new ModelAndView("lend_list");
         if(totalCount > 0){
             if(pageSize <= 0){
                 pageSize = 9;
             }
             if(curPage > 1){
-                curPage = curPage*pageSize - pageSize + 1;
+                curPage = curPage*pageSize - pageSize;
             }
-            modelAndView.addObject("list",lendService.getPageLendList(curPage, pageSize));
+            modelAndView.addObject("list",
+                    lendServiceImpl.queryLendList(keyword, deadline, curPage, pageSize));
         }
         modelAndView.addObject("totalCount", totalCount);
+        modelAndView.addObject("keyword", keyword);
+        modelAndView.addObject("deadline", deadline==0?null:deadline);
         return modelAndView;
     }
 
     @RequestMapping("/mylend.html")
-    public ModelAndView myLend(HttpServletRequest request){
+    public ModelAndView myLend(){
         ReaderCard readerCard=(ReaderCard) request.getSession().getAttribute("readercard");
         ModelAndView modelAndView=new ModelAndView("reader_lend_list");
-        modelAndView.addObject("list",lendService.myLendList(readerCard.getReaderId()));
+        modelAndView.addObject("list",lendServiceImpl.myLend(readerCard.getReaderId(), Constants.DEFAULT_INDEX, Constants.DEFAULT_SIZE));
         return modelAndView;
     }
 

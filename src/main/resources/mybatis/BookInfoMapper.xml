@@ -10,7 +10,7 @@
     <result column="language" property="language" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DECIMAL" />
     <result column="pubdate" property="pubdate" jdbcType="DATE" />
-    <result column="class_id" property="classId" jdbcType="INTEGER" />
+    <result column="class_id" property="classId" jdbcType="VARCHAR" />
     <result column="pressmark" property="pressmark" jdbcType="INTEGER" />
     <result column="state" property="state" jdbcType="SMALLINT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -46,7 +46,7 @@
       create_id, modify_time, modify_id, introduction)
     values (#{name,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR},
       #{publish,jdbcType=VARCHAR}, #{isbn,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, 
-      #{price,jdbcType=DECIMAL}, #{pubdate,jdbcType=DATE}, #{classId,jdbcType=INTEGER}, 
+      #{price,jdbcType=DECIMAL}, #{pubdate,jdbcType=DATE}, #{classId,jdbcType=VARCHAR},
       #{pressmark,jdbcType=INTEGER}, #{state,jdbcType=SMALLINT}, now(),
       #{createId,jdbcType=INTEGER}, now(), #{modifyId,jdbcType=INTEGER}, #{introduction,jdbcType=LONGVARCHAR})
   </insert>
@@ -60,7 +60,7 @@
       language = #{language,jdbcType=VARCHAR},
       price = #{price,jdbcType=DECIMAL},
       pubdate = #{pubdate,jdbcType=DATE},
-      class_id = #{classId,jdbcType=INTEGER},
+      class_id = #{classId,jdbcType=VARCHAR},
       pressmark = #{pressmark,jdbcType=INTEGER},
       state = #{state,jdbcType=SMALLINT},
       modify_time = now(),
@@ -68,11 +68,30 @@
     where book_id = #{bookId,jdbcType=BIGINT}
   </update>
 
-  <update id="deleteBookByBookId" parameterType="com.ying.background.model.BookInfo" >
+  <update id="deleteBookByBookId">
     update book_info
     set is_deleted = #{isDeleted},
       modify_time = now(),
       modify_id = #{modifyId}
     where book_id = #{bookId}
   </update>
+
+  <select id="queryBooksCount" resultType="java.math.BigDecimal">
+    SELECT count(*) FROM book_info
+    WHERE is_deleted = 0
+    <if test="searchWord != null and searchWord != ''">
+      and (position(#{searchWord} in book_id) or position(#{searchWord} in name))
+    </if>
+  </select>
+
+  <select id="queryBooks" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List" /> FROM book_info
+    WHERE is_deleted = 0
+    <if test="searchWord != null and searchWord != ''">
+      and (position(#{searchWord} in book_id) or position(#{searchWord} in name))
+    </if>
+    <if test="length != 0">
+      limit #{offset}, #{length}
+    </if>
+  </select>
 </mapper>

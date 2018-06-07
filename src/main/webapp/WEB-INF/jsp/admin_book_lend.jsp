@@ -7,7 +7,12 @@
     <script src="js/bootstrap.min.js" ></script>
     <style>
         body{
-            background-color: rgb(240,242,245);
+            /*background-color: rgb(240,242,245);*/
+            background: url('https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/0F/09/ChMkJlauzYiIIU3UAFNltyuxFDQAAH9GAKkOzMAU2XP642.jpg') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
         }
     </style>
 
@@ -64,7 +69,7 @@
                             var readerId = $("#readerId").val();
                             if(readerId != ""){
                                 $.ajax({
-                                    url: "/lenovo_reader.html",
+                                    url: "/lenovo_reader.html?keyword="+readerId,
                                     type:"get",
                                     dataType:"html",
                                     //async:true,//异步请求 会执行后面的
@@ -105,7 +110,7 @@
 
                     function checkReaderId() {
                         if($("#name").val()==''||$("#readerId").val()==''){
-                            alert("请填入正确的读者证号！");
+//                            alert("请填入正确的读者证号！");
                             $("#submit").attr("disabled", "disabled");
                         }else{
                             var readerId = $("#readerId").val();
@@ -115,7 +120,7 @@
                                 dateType: "json",
                                 success: function (res) {
                                     if(!res){
-                                        alert("请填入正确的读者证号！");
+//                                        alert("请填入正确的读者证号！");
                                         $("#submit").attr("disabled", "disabled");
                                     }else{
                                         $("#submit").attr("disabled", false);

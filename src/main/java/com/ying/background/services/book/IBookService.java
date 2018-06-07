@@ -1,6 +1,6 @@
 package com.ying.background.services.book;
 
-import com.ying.background.dto.BookDTO;
+import com.ying.background.model.BookInfo;
 
 import java.util.List;
 
@@ -9,7 +9,15 @@ import java.util.List;
  */
 public interface IBookService {
 
-    List<BookDTO> getAllBook();
+    int getQueryBookCount(String searchWord);
 
-    boolean addBook(BookDTO bookDTO);
+    List<BookInfo> queryBooks(String searchWord, int offset, int length);
+
+    boolean addBook(BookInfo bookInfo);
+
+    boolean editBook(BookInfo bookInfo);
+
+    BookInfo getBookDetail(Long bookId);
+
+    boolean delBook(Long bookId);
 }

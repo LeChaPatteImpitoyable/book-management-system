@@ -7,7 +7,15 @@
     <script src="js/bootstrap.min.js" ></script>
     <style>
         body{
-            background-color: rgb(240,242,245);
+            /*background-color: rgb(240,242,245);*/
+            background: url('https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/02/06/ChMkJ1bKynKIJdkTAEoM11B450YAALIbwFdKEgASgzv882.jpg') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+        .panel{
+            opacity:0.95;
         }
     </style>
 
@@ -24,7 +32,7 @@
             <form action="reader_add_do.html" method="post" id="readeredit" >
                 <div class="input-group">
                     <span  class="input-group-addon">读者证号</span>
-                    <input  type="text" class="form-control" name="readerId" id="readerId" ">
+                    <input  type="text" class="form-control" name="readerId" id="readerId">
                 </div>
 
                 <div class="input-group">
@@ -68,6 +76,7 @@
                 </script>
             </form>
         </div>
+        <input type="button" style="float: right;" onclick="javascript:history.back(-1);" value="返回上一页">
     </div>
 
 </div>

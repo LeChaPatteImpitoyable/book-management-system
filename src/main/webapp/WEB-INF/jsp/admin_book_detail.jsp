@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -8,7 +9,15 @@
     <script src="js/bootstrap.min.js" ></script>
     <style>
         body{
-            background-color: rgb(240,242,245);
+            /*background-color: rgb(240,242,245);*/
+            background: url('https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/0E/0F/ChMkJ1sYylmIJMWEAA2kWnSS2pMAAo2TQGcckMADaRy914.jpg') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+        .panel{
+            opacity:0.90;
         }
     </style>
 
@@ -53,11 +62,11 @@
                 </tr>
                 <tr>
                     <th>出版日期</th>
-                    <td>${detail.pubdate}</td>
+                    <td><fmt:formatDate value="${detail.pubdate}" pattern="yyyy-MM-dd"/></td>
                 </tr>
                 <tr>
                     <th>分类号</th>
-                    <td>${detail.classId}.${detail.className}</td>
+                    <td>${detail.classId}</td>
                 </tr>
                 <tr>
                     <th>书架号</th>

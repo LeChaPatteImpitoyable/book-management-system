@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -8,7 +9,15 @@
     <script src="js/bootstrap.min.js" ></script>
     <style>
         body{
-            background-color: rgb(240,242,245);
+            /*background-color: rgb(240,242,245);*/
+            background: url('https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/0E/0F/ChMkJ1sYylmIJMWEAA2kWnSS2pMAAo2TQGcckMADaRy914.jpg') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+        .panel{
+            opacity:0.90;
         }
     </style>
 
@@ -54,17 +63,17 @@
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon">出版日期</span>
-                    <input type="text" class="form-control" name="pubdate" id="pubdate" value="${detail.pubdate}">
+                    <input type="text" class="form-control" name="pubdate" id="pubdate" value="<fmt:formatDate value='${detail.pubdate}' type='date'/>">
                 </div>
                 <div class="input-group">
                     <span  class="input-group-addon">分类号</span>
-                    <%--<input type="text" class="form-control" name="classId" id="classId" value="${detail.classId}">--%>
-                    <select name="classId" id="classId" class="form-control" name="分类号">
-                        <option value="${detail.classId}">请选择...</option>
-                        <c:forEach items="${classInfos}" var="classInfo">
-                            <option value="${classInfo.classId}" <c:if test="${classInfo.classId==detail.classId}">selected='true'</c:if>>${classInfo.className}</option>
-                        </c:forEach>
-                    </select>
+                    <input type="text" class="form-control" name="classId" id="classId" value="${detail.classId}">
+                    <%--<select name="classId" id="classId" class="form-control" name="分类号">--%>
+                        <%--<option value="${detail.classId}">请选择...</option>--%>
+                        <%--<c:forEach items="${classInfos}" var="classInfo">--%>
+                            <%--<option value="${classInfo.classId}" <c:if test="${classInfo.classId==detail.classId}">selected='true'</c:if>>${classInfo.className}</option>--%>
+                        <%--</c:forEach>--%>
+                    <%--</select>--%>
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon">书架号</span>
@@ -98,6 +107,7 @@
                 </script>
             </form>
         </div>
+        <input type="button" style="float: right;" onclick="javascript:history.back(-1);" value="返回上一页">
     </div>
 
 </div>

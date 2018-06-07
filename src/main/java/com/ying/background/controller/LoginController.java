@@ -26,9 +26,6 @@ import java.util.HashMap;
 public class LoginController extends BaseController {
 
     @Autowired
-    private LoginService loginService;
-
-    @Autowired
     private ICustomerService customerService;
 
     //负责处理login.html请求
@@ -82,18 +79,14 @@ public class LoginController extends BaseController {
     }
 
     @RequestMapping("/admin_repasswd_do")
-    public String reAdminPasswdDo(String oldPasswd, String newPasswd, RedirectAttributes redirectAttributes ) {
-
-        Admin admin=(Admin) request.getSession().getAttribute("admin");
-        int id=admin.getAdminId();
-        String passwd=loginService.getAdminPasswd(id);
-
+    public String reAdminPasswdDo(String oldPasswd, String newPasswd, RedirectAttributes redirectAttributes, HttpServletResponse response) {
+        Customer customer = customerService.getCustomer(getCid());
+        String passwd = customer.getPassword();
         if(passwd.equals(oldPasswd)){
-            boolean succ=loginService.adminRePasswd(id,newPasswd);
+            boolean succ = customerService.updatePassword(customer.getId(), newPasswd);
             if (succ){
-
-                redirectAttributes.addFlashAttribute("succ", "密码修改成功！");
-                return "redirect:/admin_repasswd.html";
+                HttpUtil.removeCookie(response, HttpUtil.BOOK_TOKEN);
+                return "redirect:/login.html";
             }
             else {
                 redirectAttributes.addFlashAttribute("error", "密码修改失败！");

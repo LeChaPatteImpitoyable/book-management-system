@@ -23,7 +23,7 @@
     </style>
 
 </head>
-<body background="img/281289-106.jpg">
+<body background="https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/0F/09/ChMkJlauzYiIIU3UAFNltyuxFDQAAH9GAKkOzMAU2XP642.jpg">
 <jsp:include page="head.jsp"/>
 <!-- 模态框（Modal） -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
