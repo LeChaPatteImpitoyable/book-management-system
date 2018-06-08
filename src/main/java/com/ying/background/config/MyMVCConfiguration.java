@@ -1,5 +1,6 @@
 package com.ying.background.config;
 
+import com.ying.background.config.interceptor.ContextInterceptor;
 import com.ying.background.config.interceptor.LoginInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,6 +32,11 @@ public class MyMVCConfiguration extends WebMvcConfigurerAdapter {
         return new LoginInterceptor();
     }
 
+    @Bean
+    public ContextInterceptor contextInterceptor(){
+        return new ContextInterceptor();
+    }
+
     /**
      * 描述: 登录态拦截检查
      * 作者: yingsy
@@ -40,6 +46,7 @@ public class MyMVCConfiguration extends WebMvcConfigurerAdapter {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(contextInterceptor()).addPathPatterns("/**");
         registry.addInterceptor(loginInterceptor()).addPathPatterns("/**").excludePathPatterns("/","/api/loginCheck","/login.html","/js/**","/image/**","/css/**","/error/**","/fonts/**");
         //.excludePathPatterns("/mall/*").excludePathPatterns("/c/**");
         super.addInterceptors(registry);

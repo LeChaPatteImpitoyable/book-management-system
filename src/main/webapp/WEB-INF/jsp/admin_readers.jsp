@@ -54,9 +54,12 @@
 <div style="padding: 70px 550px 10px">
     <form   method="post" action="allreaders.html" class="form-inline"  id="searchform">
         <div class="input-group">
-            <input type="text" placeholder="输入读者姓名或卡号" value="${keyword}" autocomplete="off" id="keyword" name="keyword" class="form-control">
+            <input type="text" placeholder="输入读者姓名或卡号" value="${keyword}" autocomplete="off" id="search" name="keyword" class="form-control">
             <span class="input-group-btn">
                 <input type="submit" value="搜索" class="btn btn-default">
+            </span>
+            <span class="input-group-btn">
+                <a href="allreaders.html"><input type="button" value="清空" class="btn btn-default"></a>
             </span>
         </div>
     </form>
@@ -87,11 +90,6 @@
             return mySubmit(false);
         }
     });
-    //    setTimeout(function(){document.getElementsByClassName("alert-dismissable").style.display="none";},1000);
-    //
-    //    $(document).ready(function(){//页面加载完之后，自动执行该方法
-    //        setTimeout(function(){$("#test").hide();},2000);//2秒后执行该方法
-    //    });
 
     /**
      * 纯粹的JS分页插件，代码缺点：JS操作DOM冗余太多，太繁琐
@@ -117,10 +115,10 @@
     });
 
     function refrechHtm (curPage,pageSize) {
-        var keyword = ${keyword}+ '';
+        var keyword = $("#search").val();
         $.ajax({
             type: "get",
-            url: "/allreaders_do.html?curPage="+curPage+"&pageSize="+pageSize+"&keyword="+keyword,
+            url: "${path}/allreaders_do.html?curPage="+curPage+"&pageSize="+pageSize+"&keyword="+keyword,
             dateType: "html",
             success: function (res) {
                 console.log(JSON.stringify(${totalCount}));

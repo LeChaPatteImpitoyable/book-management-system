@@ -27,7 +27,7 @@
             <h3 class="panel-title">借阅《 ${book.name}》</h3>
         </div>
         <div class="panel-body">
-            <form action="lendbookdo.html?id=${book.bookId}" method="post" id="lendbook" >
+            <form action="lendbookdo.html?id=${book.bookId}" autocomplete="off" method="post" id="lendbook" >
                 <div class="input-group">
                     <span  class="input-group-addon">编号</span>
                     <input type="text" readonly="readonly" class="form-control" name="bookId" id="bookId" value="${book.bookId}">
@@ -116,7 +116,7 @@
                             var readerId = $("#readerId").val();
                             $.ajax({
                                 type: "get",
-                                url: "/reader_info_do?readerId="+readerId,
+                                url: "${path}/reader_info_do?readerId="+readerId,
                                 dateType: "json",
                                 success: function (res) {
                                     if(!res){

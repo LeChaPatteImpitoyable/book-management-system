@@ -21,6 +21,9 @@
         .panel{
             opacity:0.90;
         }
+        .btn-h{
+            padding: 43% 21%;
+        }
     </style>
 
 </head>
@@ -32,10 +35,10 @@
             <input type="text" placeholder="输入超期的天数" value="${deadline}" id="deadline" name="deadline" class="form-control">
             <input type="text" placeholder="输入相关的信息" value="${keyword}" id="keyword" name="keyword" class="form-control">
             <span class="input-group-btn">
-                <input type="submit" value="搜索" class="btn btn-default" style="padding: 23px 12px;">
+                <input type="submit" value="搜索" class="btn btn-default btn-h">
             </span>
             <span class="input-group-btn">
-                <<a href="lendlist.html"><input type="button" value="清空" class="btn btn-default" style="padding: 23px 12px;"></a>
+                <a href="lendlist.html"><input type="button" value="清空" class="btn btn-default btn-h"></a>
             </span>
         </div>
     </form>
@@ -75,22 +78,16 @@
 </div>
 
 <script>
-    function mySubmit(flag){
-        return flag;
-    }
-    $("#searchform").submit(function () {
-        var val=$("#keyword").val();
-        if(val==''){
-            alert("请输入关键字");
-            return mySubmit(false);
-        }
-    })
-
-    //    setTimeout(function(){document.getElementsByClassName("alert-dismissable").style.display="none";},1000);
-    //
-    //    $(document).ready(function(){//页面加载完之后，自动执行该方法
-    //        setTimeout(function(){$("#test").hide();},2000);//2秒后执行该方法
-    //    });
+//    function mySubmit(flag){
+//        return flag;
+//    }
+//    $("#searchform").submit(function () {
+//        var val=$("#keyword").val();
+//        if(val==''){
+//            alert("请输入关键字");
+//            return mySubmit(false);
+//        }
+//    })
 
     /**
      * 纯粹的JS分页插件，代码缺点：JS操作DOM冗余太多，太繁琐
@@ -116,8 +113,8 @@
     });
 
     function refrechHtm (curPage,pageSize) {
-        var keyword = ${keyword}+ '';
-        var deadline = ${deadline}+ '';
+        var keyword = $("#keyword").val();
+        var deadline = $("#deadline").val();
         $.ajax({
             type: "get",
             url: "/lendlist_do.html?curPage="+curPage+"&pageSize="+pageSize+"&keyword="+keyword+"&deadline="+deadline,

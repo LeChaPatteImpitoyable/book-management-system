@@ -32,12 +32,12 @@
             <form action="reader_add_do.html" method="post" id="readeredit" >
                 <div class="input-group">
                     <span  class="input-group-addon">读者证号</span>
-                    <input  type="text" class="form-control" name="readerId" id="readerId">
+                    <input  type="text" class="form-control" name="readerId" id="readerId" placeholder="请输入证件号码">
                 </div>
 
                 <div class="input-group">
                     <span class="input-group-addon">姓名</span>
-                    <input type="text" class="form-control" name="name" id="name"  >
+                    <input type="text" class="form-control" name="name" id="name" placeholder="请输入姓名">
                 </div>
                 <div class="input-group">
                     <span  class="input-group-addon">性别</span>
@@ -50,15 +50,15 @@
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon">生日</span>
-                    <input type="text" class="form-control" name="birth" id="birth"  >
+                    <input type="text" class="form-control" name="birth" id="birth" placeholder="2018-01-01" >
                 </div>
                 <div class="input-group">
                     <span  class="input-group-addon">地址</span>
-                    <input type="text" class="form-control" name="address" id="address"  >
+                    <input type="text" class="form-control" name="address" id="address" placeholder="请输入地址">
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon">电话</span>
-                    <input type="text" class="form-control" name="telcode" id="telcode"  >
+                    <input type="text" class="form-control" name="telcode" id="telcode" placeholder="请输入电话" >
                 </div>
                 <input type="submit" value="添加" class="btn btn-success btn-sm" class="text-left">
                 <script>
