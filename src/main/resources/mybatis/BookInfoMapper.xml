@@ -51,6 +51,55 @@
       #{createId,jdbcType=INTEGER}, now(), #{modifyId,jdbcType=INTEGER}, #{introduction,jdbcType=LONGVARCHAR})
   </insert>
 
+  <update id="updateByPrimaryKeySelective" parameterType="com.ying.background.model.BookInfo" >
+    update book_info
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="publish != null" >
+        publish = #{publish,jdbcType=VARCHAR},
+      </if>
+      <if test="isbn != null" >
+        ISBN = #{isbn,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null" >
+        language = #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="pubdate != null" >
+        pubdate = #{pubdate,jdbcType=DATE},
+      </if>
+      <if test="classId != null" >
+        class_id = #{classId,jdbcType=VARCHAR},
+      </if>
+      <if test="pressmark != null" >
+        pressmark = #{pressmark,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=SMALLINT},
+      </if>
+      <if test="1==1" >
+        modify_time = now(),
+      </if>
+      <if test="modifyId != null" >
+        modify_id = #{modifyId,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=INTEGER},
+      </if>
+      <if test="introduction != null" >
+        introduction = #{introduction,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where book_id = #{bookId,jdbcType=BIGINT}
+  </update>
+
   <update id="updateByPrimaryKey" parameterType="com.ying.background.model.BookInfo" >
     update book_info
     set name = #{name,jdbcType=VARCHAR},

@@ -41,7 +41,7 @@ public class BookServiceImpl implements IBookService {
     @Transactional
     @Override
     public boolean editBook(BookInfo bookInfo) {
-        return bookInfoMapper.updateByPrimaryKey(bookInfo) > 0;
+        return bookInfoMapper.updateByPrimaryKeySelective(bookInfo) > 0;
     }
 
     @Override

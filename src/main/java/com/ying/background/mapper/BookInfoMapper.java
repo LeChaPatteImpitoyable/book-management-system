@@ -19,6 +19,8 @@ public interface BookInfoMapper {
 
     int updateByPrimaryKey(BookInfo record);
 
+    int updateByPrimaryKeySelective(BookInfo record);
+
     int deleteBookByBookId(Long bookId);
 
     BigDecimal queryBooksCount(@Param("searchWord") String searchWord);

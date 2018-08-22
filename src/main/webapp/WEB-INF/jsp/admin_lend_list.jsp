@@ -117,7 +117,7 @@
         var deadline = $("#deadline").val();
         $.ajax({
             type: "get",
-            url: "/lendlist_do.html?curPage="+curPage+"&pageSize="+pageSize+"&keyword="+keyword+"&deadline="+deadline,
+            url: "${path}/lendlist_do.html?curPage="+curPage+"&pageSize="+pageSize+"&keyword="+keyword+"&deadline="+deadline,
             dateType: "html",
             success: function (res) {
                 console.log(JSON.stringify(${totalCount}));

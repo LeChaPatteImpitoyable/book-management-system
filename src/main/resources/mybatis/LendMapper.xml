@@ -39,7 +39,7 @@
 
   <update id="bookReturn" parameterType="com.ying.background.model.Lend" >
     update lend_list SET
-    back_date = now(),modify_time = now(),modify_id = #{modifyId},
+    back_date = now(),modify_time = now(),modify_id = #{modifyId}
     where book_id = #{bookId} and back_date is null
   </update>
 
@@ -78,6 +78,7 @@
       </if>
     </where>
     <if test="length != 0">
+      order by ll.back_date,ll.sernum
       limit #{offset}, #{length}
     </if>
   </select>

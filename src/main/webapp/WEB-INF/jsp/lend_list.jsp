@@ -35,7 +35,9 @@
                     <td>否</td>
                 </c:otherwise>
             </c:choose>
-
+            <c:if test="${empty alog.backDate}">
+                <td><a href="returnbook.html?bookId=<c:out value="${alog.bookId}&flag=1"></c:out>"><button type="button" class="btn btn-primary btn-xs">归还</button></a></td>
+            </c:if>
         </tr>
     </c:forEach>
     </tbody>

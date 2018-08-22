@@ -69,7 +69,7 @@
                             var readerId = $("#readerId").val();
                             if(readerId != ""){
                                 $.ajax({
-                                    url: "/lenovo_reader.html?keyword="+readerId,
+                                    url: "${path}/lenovo_reader.html?keyword="+readerId,
                                     type:"get",
                                     dataType:"html",
                                     //async:true,//异步请求 会执行后面的
